@@ -28,7 +28,19 @@ Bean标签
 
 
 
+
 Bean的作用范围
+scope                          ：Bean的作用范围
+
+ singleton                  ：默认的，Spring会采用单例模式创建这个对象。
+
+prototype       		 ：多例模式。（Struts2**和Spring整合一定会用到）**
+
+request            	 ：应用在web项目中，Spring创建这个类以后，将这个类存入到request范围中。
+
+session             ：应用在web项目中，Spring创建这个类以后，将这个类存入到session范围中。
+
+globalsession  ：应用在web项目中，必须在porlet环境下使用。但是如果没有这种环境，相对于session。
 
 ​
 
@@ -41,18 +53,25 @@ bean可以通过ApplicationContextAware以编程方式操作创建它们的方�
 ###方法二注解
 
   
-
+@Compoment
 相当于在spring容器中写入一个bean标签
 
 自动装配 
-  
+@Autowired
 
 按文件目录获取配置文件
-
+FileSystemXmlApplicationContext
 
 
 打印容器中bean的个数
-
+int count = context.getBeanDefinitionCount();
+		System.out.println("bean的个数:"+ count);
+		String[] names = context.getBeanDefinitionNames();
+		for (String name : names) {
+			System.out.println(name+ "");
+			Object bean = context.getBean(name);
+			System.out.println(bean.getClass());
+		}
 
 
 @Autowired注解可以应用于构造器，set方法，私有属性。
@@ -68,21 +87,22 @@ bean可以通过ApplicationContextAware以编程方式操作创建它们的方�
 ###方法三配置类
 
 
-
+@Congiguration
 设置bean标签   
-
+@Bean
 
 
 容器一
 
-
+ApplcationContext
 
 容器二
-
+AnnotationConfigApplicationContext
 
 
 输出：
-
+String zz = context.getBean("sumBean",SumBean.class).toString();
+		System.out.println(zz);
 
 
    
@@ -95,7 +115,7 @@ bean可以通过ApplicationContextAware以编程方式操作创建它们的方�
 注意：application.java扫描本目录及其子目录下的其他文件所有其他文件应在其包下建立。
 
 欢迎横幅
-
+banner.txt
 
 
 
@@ -113,7 +133,7 @@ bean可以通过ApplicationContextAware以编程方式操作创建它们的方�
 
 
    逻辑建立地址
-
+@RequestMapping
 
 
 
@@ -127,13 +147,39 @@ bean可以通过ApplicationContextAware以编程方式操作创建它们的方�
 
 
 如果没有active，会执行默认配置文件，但现在执行的是hello配置文件
+spring:
+  profile: 
+    active: 
+name1: aaaa
+---
+ 
+spring: 
+  profile: goodbye,dev
+name1: cccc
+
+---
+
+spring:
+  profile: hello
+name1: bbbb
+
+---
 
 配置日志
-
+@PostConstruct
+	public void queryObligations() {  
+		LOGGER.debug("Sample Debug Message");
+		LOGGER.info("Sample info Message");
+		LOGGER.trace("Sample trace Message");
+		LOGGER.error("Sample error Message");
+		LOGGER.warn("Sample warn Message");  
+    }
 
 
 在配置文件中：
-
+logging.level.root=info
+logging.leave.org.springframework.web=info
+logging.file=my.log
 
 
 admin监控：
