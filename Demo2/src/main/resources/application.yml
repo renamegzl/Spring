@@ -1,0 +1,46 @@
+##name: bb
+#name1: aaaa
+#hello: good morning
+#spring:
+#  profile: 
+#    active: 
+     
+
+---
+spring:
+  profile: 
+    active: 
+name1: aaaa
+---
+ 
+spring: 
+  profile: goodbye,dev
+name1: cccc
+
+---
+
+spring:
+  profile: hello
+name1: bbbb
+
+---
+#management:
+#  security:
+#    enabled: false
+#  port: 8888
+#  context-path: /abc
+#  
+#endpoints:
+#  actuator:
+#    enabled: true
+#  shutdown:
+#    enabled: true
+#    
+#info:
+#  app:
+#    name: spring-boot-actuator
+#    version: 1.0.0
+    
+   
+
+
